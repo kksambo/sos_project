@@ -27,7 +27,7 @@ async def root():
     message = client.messages.create(
         from_='whatsapp:+14155238886',
         body='Hi Refilwe, you have an emergency alert. Respond promptly.',
-        to='whatsapp:+27763951934'
+        to='whatsapp:+27672531917'
     )
 
     return {"message_sid": message.sid}
