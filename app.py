@@ -3,6 +3,7 @@ import uvicorn
 import fastapi
 import os
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = fastapi.FastAPI()
 
@@ -13,9 +14,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+class Location(BaseModel):
+    latitude: float
+    longitude: float
+    
 @app.get("/contact")
-async def root():
+async def sos_alert():
+    latitude = location.latitude
+    longitude = location.longitude
+    location_url = f"https://www.google.com/maps?q={latitude},{longitude}"
     account_sid = os.getenv("TWILIO_ACCOUNT_SID")
     auth_token = os.getenv("TWILIO_AUTH_TOKEN")
 
@@ -26,7 +33,7 @@ async def root():
 
     message = client.messages.create(
         from_='whatsapp:+14155238886',
-        body='Hi Refilwe, you have an emergency alert. Respond promptly.',
+        body=f'hi refilwe you have an emergency alert  Location: {location_url}',
         to='whatsapp:+27672531917'
     )
 
