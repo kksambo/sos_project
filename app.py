@@ -18,7 +18,7 @@ class Location(BaseModel):
     latitude: float
     longitude: float
     
-@app.get("/contact")
+@app.post("/contact")
 async def sos_alert():
     latitude = location.latitude
     longitude = location.longitude
