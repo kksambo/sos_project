@@ -19,7 +19,7 @@ class Location(BaseModel):
     longitude: float
     
 @app.post("/contact")
-async def sos_alert():
+async def sos_alert(location: Location):
     latitude = location.latitude
     longitude = location.longitude
     location_url = f"https://www.google.com/maps?q={latitude},{longitude}"
